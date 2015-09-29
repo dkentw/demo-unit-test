@@ -17,14 +17,13 @@ class Hash:
 
     
 class ValidateAccount:
-    def __init__(self):
-        self.account_db = AccountSqlite()
-        self.passwd_hash = Hash()
+    def __init__(self, account_db, passwd_hash):
+        self.account_db = account_db
+        self.passwd_hash = passwd_hash
         
     def check_account(self, id, password):
         password_by_id = self.account_db.get_password(id)
         password_by_hash = self.passwd_hash.get_hash(password)
-
         if password_by_id == password_by_hash:
             return True
         else:
